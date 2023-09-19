@@ -8,38 +8,44 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter a natural number:");
-        int number = scanner.nextInt();
+        String stringNumber = scanner.nextLine();
+        int number = Integer.parseInt(stringNumber.trim());
 
+        if (printToNaturalNumber(number)) return;
+
+        System.out.printf("Properties of %s\n", number);
+
+        printIsEvenOrOdd(number);
+        printIsBuzz(number);
+        System.out.println("duck: " + isDuck(number));
+    }
+
+    private static boolean isDuck(int number) {
+        while (number > 0) {
+            if (number % 10 == 0) {
+                return true;
+            }
+            number /= 10;
+        }
+        return false;
+    }
+
+    private static boolean printToNaturalNumber(int number) {
         if (number < 1) {
             System.out.println("This number is not natural!");
-        } else {
-            if (number % 2 == 0) {
-                System.out.println("This number is Even.");
-            } else {
-                System.out.println("This number is Odd.");
-            }
-
-            if (number % 10 == 7 || number % 7 == 0) {
-                System.out.println("It is a Buzz number.");
-            } else {
-                System.out.println("It is not a Buzz number.");
-            }
-
-            System.out.println("Explanation:");
-
-            if (number % 10 == 7) {
-                if (number % 7 == 0) {
-                    System.out.println(number + " is divisible by 7 and ends with 7");
-                } else {
-                    System.out.println(number + " ends with 7");
-                }
-            } else {
-                if (number % 7 == 0) {
-                    System.out.println(number + " is divisible by 7");
-                } else {
-                    System.out.println(number + " is neither divisible by 7 nor does it end with 7");
-                }
-            }
+            return true;
         }
+        return false;
+    }
+
+    private static void printIsBuzz(int number) {
+        boolean isBuzz = number % 10 == 7 || number % 7 == 0;
+        System.out.println("buzz: " + isBuzz);
+    }
+
+    private static void printIsEvenOrOdd(int number) {
+        boolean isEvenOrOdd = number % 2 == 0;
+        System.out.println("even: " + isEvenOrOdd);
+        System.out.println("odd: " + !isEvenOrOdd);
     }
 }
